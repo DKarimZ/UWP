@@ -15,12 +15,16 @@ namespace BLLC.Services
 		Task<PageResponse<Plat>> GetAllPlats(PageRequest pagerequest);
 		Task<PageResponse<Ingredient>> GetAllIngredients(PageRequest pagerequest);
 
+		Task<IEnumerable<Plat>> GetAllPlatsByDateAndService(ServicesFilterRequest pfr);
+
 		Task<IEnumerable<Plat>> GetAllPlatsByIngredient(int IdIngredient);
 		Task<IEnumerable<Plat>> GetAllPlatsByType(int typePlat);
 
 		Task<IEnumerable<Plat>> GetAllPlatsByPopularity();
 
 		Task<Service> GetServiceById(int idService);
+
+		Task<Service> GetServiceByDateAndMidi(DateTime dateService, bool midi);
 
 		Task<Plat> GetPlatById(int idService);
 		Task<Ingredient> GetIngredientById(int idIngredient);

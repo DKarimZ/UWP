@@ -1,0 +1,237 @@
+﻿<!--<Page
+    x:Class="UWPFoodBook.Views.MenuChoicePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UWPFoodBook"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:controls="using:Microsoft.UI.Xaml.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Margin="0,0,0,-142">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="200"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="1"  Orientation="Horizontal" HorizontalAlignment="Center" Width="auto">
+            <Button  Content="Lundi" Click="ButtonLundi_Click"/>
+            <DatePicker x:Name="daymenu" Header="Date du repas"  Date="{x:Bind VM.CurrentDate , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  VerticalAlignment="Center" Width="400" FontSize="32"/>                                                         
+                
+           --><!-- <Button  Content="Mardi" Click="ButtonMardi_Click"/>
+            <Button  Content="Mercredi" Click="ButtonMercredi_OnClick"/>
+            <Button  Content="Jeudi" Click="ButtonJeudi_OnClick"/>
+            <Button  Content="Vendredi" Click="ButtonVendredi_OnClick"/>
+            <Button  Content="Samedi" Click="ButtonSamedi_OnClick"/>--><!--
+        </StackPanel>
+        <StackPanel Grid.Row="2"  Orientation="Horizontal" HorizontalAlignment="Center" Width="auto">
+            <Button  Content="Reserver" Click="ButtonReserver_Click"/>
+            --><!--   <Button   Content="Midi" Click="ButtonMidi_Click"/>
+            <Button   Content="Soir" Click="ButtonSoir_Click"/> --><!--
+        </StackPanel>
+        --><!--<TextBox  Grid.Row="3" HorizontalAlignment="Center" PlaceholderText="Midi ou Soir(0 ou 1)" Text="{x:Bind VM.MIDI, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  VerticalAlignment="Center" Width="400" FontSize="32"/>--><!--
+
+        <TextBox Grid.Row="3" HorizontalAlignment="Center" PlaceholderText="Entrée" Text="{x:Bind VM.Entree, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" VerticalAlignment="Center" Width="400" FontSize="32"/>
+        <TextBox Grid.Row="4" HorizontalAlignment="Center" PlaceholderText="plat" Text="{x:Bind VM.Plat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" VerticalAlignment="Center" Width="400" FontSize="32"/>
+        <TextBox Grid.Row="5" HorizontalAlignment="Center" PlaceholderText="Dessert" Text="{x:Bind VM.Dessert, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" VerticalAlignment="Center" Width="400" FontSize="32"/>
+        <Button  Content="Lundi" Click="ButtonReserver_Click"/>
+        --><!-- <TextBox Grid.Row="4" HorizontalAlignment="Center" PlaceholderText="Plat" Text="{x:Bind VM.Plat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" VerticalAlignment="Center" Width="400" FontSize="32"/>
+        <TextBox Grid.Row="5" HorizontalAlignment="Center" PlaceholderText="Dessert" Text="{x:Bind VM.Dessert, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" VerticalAlignment="Center" Width="400" FontSize="32"/>
+        --><!--
+    </Grid>
+</Page>-->
+<Page
+     x:Class="UWPFoodBook.Views.ServicePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UWPFoodBook"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:controls="using:Microsoft.UI.Xaml.Controls"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+
+    <Grid Margin="0,0,-72,-135">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column ="0"  Grid.ColumnSpan="7" Background="#152951"/>
+        <Border Grid.Row="1" Grid.ColumnSpan="7" Background="#152951"/>
+        <Border Grid.Row="2" Grid.ColumnSpan="7" Background="#152951"/>
+        <Border Grid.Row="3" Grid.ColumnSpan="7" Background="#1f3d7a"/>
+        <Border Grid.Row="4" Grid.ColumnSpan="7" Background="#152951"/>
+        <Border Grid.Row="5" Grid.ColumnSpan="7" Background="#1f3d7a"/>
+        <Border Grid.Row="6" Grid.ColumnSpan="7" Background="#152951"/>
+        <Border Grid.Row="7" Grid.ColumnSpan="7" Background="#152951"/>
+        <Border Grid.Row="8" Grid.ColumnSpan="7" Background="#152951"/>
+        <Border Grid.Row="9" Grid.ColumnSpan="7" Background="#152951"/>
+        <Border Grid.Row="10" Grid.ColumnSpan="7" Background="Black"/>
+        <Border Grid.Row="11" Grid.ColumnSpan="7" Background="#152951"/>
+        <Border Grid.Row="12" Grid.ColumnSpan="7" Background="#152951"/>
+        <Border Grid.Row="13" Grid.ColumnSpan="7" Background="#152951"/>
+        <Border Grid.Row="14" Grid.ColumnSpan="7" Background="#152951"/>
+        <Border Grid.Row="15" Grid.ColumnSpan="7" Background="#152951"/>
+        <Border Grid.Row="16" Grid.ColumnSpan="7" Background="Black"/>
+        <Border Grid.Row="17" Grid.ColumnSpan="7" Background="#1f3d7a"/>
+        <Border Grid.Row="18" Grid.ColumnSpan="7" Background="#1f3d7a"/>
+        <Border Grid.Row="19" Grid.ColumnSpan="7" Background="#1f3d7a"/>
+        <Border Grid.Row="4" Grid.ColumnSpan="7" Background="#1f3d7a"/>
+        <StackPanel Grid.Row="0"  Grid.Column="1"  Orientation="Horizontal"  Margin="0,0,0,0" HorizontalAlignment ="Center" VerticalAlignment="Center">
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Image Margin="0" Height="100" Width="100" Source="../Assets/Images/logo.jpg" >
+            </Image>
+        </StackPanel>
+        <StackPanel Grid.Row="1"  Grid.Column="3" Grid.ColumnSpan="3" Grid.RowSpan="2" Margin="40,0,0,0" VerticalAlignment="Center">
+            <TextBlock Foreground="White" FontSize="25" Text="Mon restaurant"/>
+        </StackPanel>
+        <StackPanel Grid.Row="4"  Grid.Column="2"  Grid.ColumnSpan="3" Margin="0,0,0,0" VerticalAlignment="Center">
+            <TextBlock Foreground="White" Width="auto" FontSize="24" Text="Menu de la semaine" VerticalAlignment="Center"></TextBlock>
+        </StackPanel>
+        <StackPanel Grid.Column="4" Grid.Row="5" Height="25" Grid.ColumnSpan="2"  Orientation="Horizontal"
+            HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBox Width="100" FontSize="24" Text="{x:Bind VM.IdService, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="6"  Grid.ColumnSpan="2" Grid.RowSpan="2" >
+            <Button Content="Lundi" Width="80" Height="40" Click="ButtonLundi_Click"  Background="LightGoldenrodYellow"/>
+        </StackPanel>
+        <StackPanel Grid.Column="3" Grid.Row="6"  Grid.ColumnSpan="3"  VerticalAlignment="Center">
+            <TextBlock Foreground="White" FontSize="25" Text="Formule de Midi" VerticalAlignment="Center" />
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="7"  Grid.ColumnSpan="2" Grid.RowSpan="2" >
+            <Button Content="Mardi" Width="80" Height="40" Click="ButtonLundi_Click"  Background="DarkOrange"/>
+        </StackPanel>
+        <StackPanel Grid.Column="3" Grid.Row="7"  Grid.ColumnSpan="3"  VerticalAlignment="Center">
+            <TextBlock Foreground="White" FontSize="25" Text="Entree" VerticalAlignment="Center" />
+        </StackPanel>
+        <StackPanel Grid.Column="4" Grid.Row="7" Height="25" Grid.ColumnSpan="2"  Orientation="Horizontal"
+            HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBox Width="100" FontSize="24" Text="{x:Bind VM.EntreeMidi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Column="4" Grid.Row="7" Height="25" Grid.ColumnSpan="2"  Orientation="Horizontal">
+            <CheckBox 
+                            
+                          IsChecked="{x:Bind RVM.EntreeMidi, Mode=TwoWay}" 
+                          x:Name="entreeCheckbox"
+                       
+                          
+            />
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="8"  Grid.ColumnSpan="2" Grid.RowSpan="2" >
+            <Button Content="Mercredi" Width="80" Height="40" Click="ButtonLundi_Click"  Background="OrangeRed"/>
+        </StackPanel>
+        <StackPanel Grid.Column="3" Grid.Row="8"  Grid.ColumnSpan="3"  VerticalAlignment="Center">
+            <TextBlock Foreground="White" FontSize="25" Text="Plat" VerticalAlignment="Center" />
+        </StackPanel>
+        <StackPanel Grid.Column="4" Grid.Row="8" Height="25" Grid.ColumnSpan="2"  Orientation="Horizontal"
+            HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBox Width="100" FontSize="24" Text="{x:Bind VM.PlatMidi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Column="3" Grid.Row="9"  Grid.ColumnSpan="3"  VerticalAlignment="Center">
+            <TextBlock Foreground="White" FontSize="25" Text="Dessert" VerticalAlignment="Center" />
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="9"  Grid.ColumnSpan="2" Grid.RowSpan="2" >
+            <Button Content="Jeudi" Width="80" Height="40" Click="ButtonLundi_Click"  Background="PaleVioletRed"/>
+        </StackPanel>
+        <StackPanel Grid.Column="4" Grid.Row="9" Height="25" Grid.ColumnSpan="2"  Orientation="Horizontal"
+            HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBox Width="100" FontSize="24" Text="{x:Bind VM.DessertMidi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="10"  Grid.ColumnSpan="2" Grid.RowSpan="2" >
+            <Button Content="Vendredi" Width="80" Height="40" Click="ButtonLundi_Click"  Background="DeepSkyBlue"/>
+        </StackPanel>
+        <StackPanel Grid.Column="3" Grid.Row="10"  Grid.ColumnSpan="3"  VerticalAlignment="Center">
+            <TextBlock Foreground="White" FontSize="25" Text="Invites" VerticalAlignment="Center" />
+        </StackPanel>
+        <StackPanel Grid.Column="4" Grid.Row="10" Height="25" Grid.ColumnSpan="2"  Orientation="Horizontal"
+            HorizontalAlignment="Center" VerticalAlignment="Center">
+            <muxc:NumberBox  Value="{x:Bind RVM.NbPersonnes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></muxc:NumberBox>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="11"  Grid.ColumnSpan="2" Grid.RowSpan="2" >
+            <Button Content="Samedi" Width="80" Height="40" Click="ButtonLundi_Click"  Background="Green"/>
+        </StackPanel>
+        <StackPanel Grid.Column="5" Grid.Row="11"  Grid.ColumnSpan="2" Grid.RowSpan="2" >
+            <Button Content="Réserver" Width="80" Height="40" Click="ButtonReserver_Click"  Background="white"/>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="11" Height="25" Grid.ColumnSpan="2"  Orientation="Horizontal"
+            HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBox Width="100" FontSize="24" Text="{x:Bind VM.IdService, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Column="3" Grid.Row="11"  Grid.ColumnSpan="2" Grid.RowSpan="2" >
+            <DatePicker x:Name="daymenu" Header="Date du repas"  Date="{x:Bind VM.CurrentDate , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  VerticalAlignment="Center" Width="400" FontSize="32"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="3" Grid.Row="12"  Grid.ColumnSpan="3"  VerticalAlignment="Center">
+            <TextBlock Foreground="White" FontSize="25" Text="Formule du Soir" VerticalAlignment="Center" />
+        </StackPanel>
+        <StackPanel Grid.Column="3" Grid.Row="13"  Grid.ColumnSpan="3"  VerticalAlignment="Center">
+            <TextBlock Foreground="White" FontSize="25" Text="Entree" VerticalAlignment="Center" />
+        </StackPanel>
+        <StackPanel Grid.Column="4" Grid.Row="13" Height="25" Grid.ColumnSpan="2"  Orientation="Horizontal"
+            HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBox Width="100" FontSize="24" Text="{x:Bind VM.EntreeSoir, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Column="3" Grid.Row="14"  Grid.ColumnSpan="3"  VerticalAlignment="Center">
+            <TextBlock Foreground="White" FontSize="25" Text="Plat" VerticalAlignment="Center" />
+        </StackPanel>
+        <StackPanel Grid.Column="4" Grid.Row="14" Height="25" Grid.ColumnSpan="2"  Orientation="Horizontal"
+            HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBox Width="100" FontSize="15" Text="{x:Bind VM.PlatSoir, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Column="3" Grid.Row="15"  Grid.ColumnSpan="3"  VerticalAlignment="Center">
+            <TextBlock Foreground="White" FontSize="25" Text="Dessert" VerticalAlignment="Center" />
+        </StackPanel>
+        <StackPanel Grid.Column="4" Grid.Row="15" Height="25" Grid.ColumnSpan="2"  Orientation="Horizontal"
+            HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBox Width="100" FontSize="24" Text="{x:Bind VM.DessertSoir, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Column="3" Grid.Row="16"  Grid.ColumnSpan="3"  VerticalAlignment="Center">
+            <TextBlock Foreground="White" FontSize="25" Text="Invites" VerticalAlignment="Center" />
+        </StackPanel>
+        <StackPanel Grid.Column="4" Grid.Row="16" Height="25" Grid.ColumnSpan="2"  Orientation="Horizontal"
+            HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBox Width="100" FontSize="24" Text="{x:Bind RVM.NbPersonnes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"></TextBox>
+        </StackPanel>
+        <!--<StackPanel Grid.Column="5" Grid.Row="17"  Grid.ColumnSpan="2" Grid.RowSpan="2" >
+        <DatePicker x:Name="daymenu" Header="Date du repas"  Date="{x:Bind VM.CurrentDate , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  VerticalAlignment="Center" Width="400" FontSize="32"/>
+        </StackPanel>-->
+        <StackPanel Grid.Column="5" Grid.Row="17"  Grid.ColumnSpan="2" Grid.RowSpan="2" >
+            <Button Content="Réserver" Width="80" Height="40" Click="ButtonLundi_Click"  Background="white"/>
+        </StackPanel>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+    </Grid>
+</Page>
+

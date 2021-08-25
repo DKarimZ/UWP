@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UWPFoodBook.Models;
 
 namespace UWPFoodBook.ViewModels
 {
 	public class MainVM : ViewModelBase
 	{
+
+
+		
 
 		private string _titre;
 

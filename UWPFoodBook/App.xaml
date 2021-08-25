@@ -3,14 +3,21 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:UWPFoodBook">
-
+    
     <Application.Resources>
-    <Style x:Key="StyleTitre" TargetType ="TextBlock">
-            <Setter Property="FontSize" Value="48"></Setter>
-            <Setter Property="Foreground" Value="#FFF"></Setter>
-            <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
-            <Setter Property="TextDecorations" Value="Underline"></Setter>
-    </Style>
-
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+                <ResourceDictionary>
+                    <Style x:Key="StyleTitre" TargetType ="TextBlock">
+                        <Setter Property="FontSize" Value="48"></Setter>
+                        <Setter Property="Foreground" Value="#FFF"></Setter>
+                        <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
+                        <Setter Property="TextDecorations" Value="Underline"></Setter>
+                    </Style>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
+    
 </Application>

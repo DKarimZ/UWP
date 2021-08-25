@@ -11,54 +11,43 @@ using System.Threading.Tasks;
 using BLLC.Extension;
 using BO.DTO.Requests;
 using BO.DTO.Responses;
+using System.Globalization;
 
 namespace BLLC.Services
 {
 	public class RestaurationService : IRestaurationService
 	{
-		private readonly HttpClient _httpClient;
 
 		public RestaurationService()
 		{
 
-// BYPASS SSL Verification self signed
-			HttpClientHandler handler = new HttpClientHandler() { 
-				ClientCertificateOptions = ClientCertificateOption.Manual,
-				ServerCertificateCustomValidationCallback = delegate { return true; }
-			};
 
-//END
-
-			_httpClient = new HttpClient(handler);
-			_httpClient.BaseAddress = new Uri("https://localhost:5001/api/v1/");
 		}
 
 		public async Task<IEnumerable<Service>> GetAllServices()
 		{
 			if (AuthentificationService.Getinstance().IsLogged)
 			{
-
-				_httpClient.DefaultRequestHeaders.Authorization =
-					new AuthenticationHeaderValue("Bearer", AuthentificationService.Getinstance().Token);
-
-
-				var reponse = await _httpClient.GetAsync($"services");
-
-				if (reponse.IsSuccessStatusCode)
+				using (var _httpClient = AuthentificationService.Getinstance().HttpClient)
 				{
-					using (var stream = await reponse.Content.ReadAsStreamAsync())
+
+					var reponse = await _httpClient.GetAsync($"services");
+
+					if (reponse.IsSuccessStatusCode)
 					{
-						List<Service> menus = await JsonSerializer.DeserializeAsync<List<Service>>(stream,
-							new JsonSerializerOptions() {PropertyNameCaseInsensitive = true});
-						return menus;
+						using (var stream = await reponse.Content.ReadAsStreamAsync())
+						{
+							List<Service> menus = await JsonSerializer.DeserializeAsync<List<Service>>(stream,
+								new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+							return menus;
+						}
+					}
+					else
+					{
+						return null;
 					}
 				}
-				else
-				{
-					return null;
-				}
 			}
-
 
 			return null;
 
@@ -71,24 +60,56 @@ namespace BLLC.Services
 			if (AuthentificationService.Getinstance().IsLogged)
 			{
 
-				_httpClient.DefaultRequestHeaders.Authorization =
-					new AuthenticationHeaderValue("Bearer", AuthentificationService.Getinstance().Token);
-
-
-				var reponse = await _httpClient.GetAsync(($"plats/ingredientATrouver/" + IdIngredient));
-
-				if (reponse.IsSuccessStatusCode)
+				using (var _httpClient = AuthentificationService.Getinstance().HttpClient)
 				{
-					using (var stream = await reponse.Content.ReadAsStreamAsync())
+
+					var reponse = await _httpClient.GetAsync(($"plats/ingredientATrouver/" + IdIngredient));
+
+					if (reponse.IsSuccessStatusCode)
 					{
-						var plats = await JsonSerializer.DeserializeAsync<IEnumerable<Plat>>(stream,
-							new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
-						return plats;
+						using (var stream = await reponse.Content.ReadAsStreamAsync())
+						{
+							var plats = await JsonSerializer.DeserializeAsync<IEnumerable<Plat>>(stream,
+								new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+							return plats;
+						}
+					}
+					else
+					{
+						return null;
 					}
 				}
-				else
+
+			}
+
+			return null;
+
+		}
+
+		public async Task<IEnumerable<Plat>> GetAllPlatsByDateAndService(ServicesFilterRequest pfr)
+		{
+
+			if (AuthentificationService.Getinstance().IsLogged)
+			{
+
+				using (var _httpClient = AuthentificationService.Getinstance().HttpClient)
 				{
-					return null;
+
+					var reponse = await _httpClient.GetAsync($"plats?date={pfr.date.GetValueOrDefault().ToString("d", CultureInfo.InvariantCulture)}&midi={pfr.midi}");
+
+					if (reponse.IsSuccessStatusCode)
+					{
+						using (var stream = await reponse.Content.ReadAsStreamAsync())
+						{
+							var plats = await JsonSerializer.DeserializeAsync<IEnumerable<Plat>>(stream,
+								new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+							return plats;
+						}
+					}
+					else
+					{
+						return null;
+					}
 				}
 
 			}
@@ -108,9 +129,8 @@ namespace BLLC.Services
 			if (AuthentificationService.Getinstance().IsLogged)
 			{
 
-				    _httpClient.DefaultRequestHeaders.Authorization = 
-					new AuthenticationHeaderValue("Bearer", AuthentificationService.Getinstance().Token);
-
+				using (var _httpClient = AuthentificationService.Getinstance().HttpClient)
+				{
 
 					var reponse = await _httpClient.GetAsync(($"plats/pop"));
 
@@ -127,6 +147,7 @@ namespace BLLC.Services
 					{
 						return null;
 					}
+				}
 
 			}
 
@@ -139,24 +160,26 @@ namespace BLLC.Services
 			if (AuthentificationService.Getinstance().IsLogged)
 			{
 
-				_httpClient.DefaultRequestHeaders.Authorization =
-					new AuthenticationHeaderValue("Bearer", AuthentificationService.Getinstance().Token);
-
-
-				var reponse = await _httpClient.GetAsync(($"plats{pageRequest.ToUriQuery()}"));
-
-				if (reponse.IsSuccessStatusCode)
+				using (var _httpClient = AuthentificationService.Getinstance().HttpClient)
 				{
-					using (var stream = await reponse.Content.ReadAsStreamAsync())
+
+
+
+					var reponse = await _httpClient.GetAsync(($"plats{pageRequest.ToUriQuery()}"));
+
+					if (reponse.IsSuccessStatusCode)
 					{
-						var plats = await JsonSerializer.DeserializeAsync<PageResponse<Plat>>(stream,
-							new JsonSerializerOptions() {PropertyNameCaseInsensitive = true});
-						return plats;
+						using (var stream = await reponse.Content.ReadAsStreamAsync())
+						{
+							var plats = await JsonSerializer.DeserializeAsync<PageResponse<Plat>>(stream,
+								new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+							return plats;
+						}
 					}
-				}
-				else
-				{
-					return null;
+					else
+					{
+						return null;
+					}
 				}
 			}
 
@@ -170,24 +193,26 @@ namespace BLLC.Services
 			if (AuthentificationService.Getinstance().IsLogged)
 			{
 
-				_httpClient.DefaultRequestHeaders.Authorization =
-					new AuthenticationHeaderValue("Bearer", AuthentificationService.Getinstance().Token);
-
-
-				var reponse = await _httpClient.GetAsync(($"ingredients{pageRequest.ToUriQuery()}"));
-
-				if (reponse.IsSuccessStatusCode)
+				using (var _httpClient = AuthentificationService.Getinstance().HttpClient)
 				{
-					using (var stream = await reponse.Content.ReadAsStreamAsync())
+
+
+
+					var reponse = await _httpClient.GetAsync(($"ingredients{pageRequest.ToUriQuery()}"));
+
+					if (reponse.IsSuccessStatusCode)
 					{
-						var ingredients = await JsonSerializer.DeserializeAsync<PageResponse<Ingredient>>(stream,
-							new JsonSerializerOptions() {PropertyNameCaseInsensitive = true});
-						return ingredients;
+						using (var stream = await reponse.Content.ReadAsStreamAsync())
+						{
+							var ingredients = await JsonSerializer.DeserializeAsync<PageResponse<Ingredient>>(stream,
+								new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+							return ingredients;
+						}
 					}
-				}
-				else
-				{
-					return null;
+					else
+					{
+						return null;
+					}
 				}
 			}
 
@@ -202,24 +227,26 @@ namespace BLLC.Services
 			if (AuthentificationService.Getinstance().IsLogged)
 			{
 
-				_httpClient.DefaultRequestHeaders.Authorization =
-					new AuthenticationHeaderValue("Bearer", AuthentificationService.Getinstance().Token);
-
-
-				var reponse = await _httpClient.GetAsync($"ingredients/" + idIngredient);
-
-				if (reponse.IsSuccessStatusCode)
+				using (var _httpClient = AuthentificationService.Getinstance().HttpClient)
 				{
-					using (var stream = await reponse.Content.ReadAsStreamAsync())
+
+
+
+					var reponse = await _httpClient.GetAsync($"ingredients/" + idIngredient);
+
+					if (reponse.IsSuccessStatusCode)
 					{
-						Ingredient ingredient = await JsonSerializer.DeserializeAsync<Ingredient>(stream,
-							new JsonSerializerOptions() {PropertyNameCaseInsensitive = true});
-						return ingredient;
+						using (var stream = await reponse.Content.ReadAsStreamAsync())
+						{
+							Ingredient ingredient = await JsonSerializer.DeserializeAsync<Ingredient>(stream,
+								new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+							return ingredient;
+						}
 					}
-				}
-				else
-				{
-					return null;
+					else
+					{
+						return null;
+					}
 				}
 			}
 
@@ -236,24 +263,60 @@ namespace BLLC.Services
 			if (AuthentificationService.Getinstance().IsLogged)
 			{
 
-				_httpClient.DefaultRequestHeaders.Authorization =
-					new AuthenticationHeaderValue("Bearer", AuthentificationService.Getinstance().Token);
-
-
-				var reponse = await _httpClient.GetAsync($"services/" + idService);
-
-				if (reponse.IsSuccessStatusCode)
+				using (var _httpClient = AuthentificationService.Getinstance().HttpClient)
 				{
-					using (var stream = await reponse.Content.ReadAsStreamAsync())
+
+
+
+					var reponse = await _httpClient.GetAsync($"services/" + idService);
+
+					if (reponse.IsSuccessStatusCode)
 					{
-						Service service = await JsonSerializer.DeserializeAsync<Service>(stream,
-							new JsonSerializerOptions() {PropertyNameCaseInsensitive = true});
-						return service;
+						using (var stream = await reponse.Content.ReadAsStreamAsync())
+						{
+							Service service = await JsonSerializer.DeserializeAsync<Service>(stream,
+								new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+							return service;
+						}
+					}
+					else
+					{
+						return null;
 					}
 				}
-				else
+			}
+
+
+			return null;
+
+		}
+
+		public async Task<Service> GetServiceByDateAndMidi(DateTime dateService, bool midi)
+		{
+			if (AuthentificationService.Getinstance().IsLogged)
+			{
+
+				using (var _httpClient = AuthentificationService.Getinstance().HttpClient)
 				{
-					return null;
+
+
+
+				
+					var reponse = await _httpClient.GetAsync($"services?date={dateService.ToString("d", CultureInfo.InvariantCulture)}&midi={true}");
+
+					if (reponse.IsSuccessStatusCode)
+					{
+						using (var stream = await reponse.Content.ReadAsStreamAsync())
+						{
+							Service servicet = await JsonSerializer.DeserializeAsync<Service>(stream,
+								new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+							return servicet;
+						}
+					}
+					else
+					{
+						return null;
+					}
 				}
 			}
 
@@ -263,29 +326,32 @@ namespace BLLC.Services
 		}
 
 
+
 		public async Task<Plat> GetPlatById(int idplat)
 		{
 			if (AuthentificationService.Getinstance().IsLogged)
 			{
 
-				_httpClient.DefaultRequestHeaders.Authorization =
-					new AuthenticationHeaderValue("Bearer", AuthentificationService.Getinstance().Token);
-
-
-				var reponse = await _httpClient.GetAsync($"plats/" + idplat);
-
-				if (reponse.IsSuccessStatusCode)
+				using (var _httpClient = AuthentificationService.Getinstance().HttpClient)
 				{
-					using (var stream = await reponse.Content.ReadAsStreamAsync())
+
+
+
+					var reponse = await _httpClient.GetAsync($"plats/" + idplat);
+
+					if (reponse.IsSuccessStatusCode)
 					{
-						Plat plat = await JsonSerializer.DeserializeAsync<Plat>(stream,
-							new JsonSerializerOptions() {PropertyNameCaseInsensitive = true});
-						return plat;
+						using (var stream = await reponse.Content.ReadAsStreamAsync())
+						{
+							Plat plat = await JsonSerializer.DeserializeAsync<Plat>(stream,
+								new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+							return plat;
+						}
 					}
-				}
-				else
-				{
-					return null;
+					else
+					{
+						return null;
+					}
 				}
 			}
 
@@ -302,20 +368,25 @@ namespace BLLC.Services
 			if (AuthentificationService.Getinstance().IsLogged)
 			{
 
-				var reponse = await _httpClient.GetAsync($"plats/type/" + typePlat);
+				using (var _httpClient = AuthentificationService.Getinstance().HttpClient)
+				{
 
-				if (reponse.IsSuccessStatusCode)
-				{
-					using (var stream = await reponse.Content.ReadAsStreamAsync())
+
+					var reponse = await _httpClient.GetAsync($"plats/type/" + typePlat);
+
+					if (reponse.IsSuccessStatusCode)
 					{
-						List<Plat> plats = await JsonSerializer.DeserializeAsync<List<Plat>>(stream,
-							new JsonSerializerOptions() {PropertyNameCaseInsensitive = true});
-						return plats;
+						using (var stream = await reponse.Content.ReadAsStreamAsync())
+						{
+							List<Plat> plats = await JsonSerializer.DeserializeAsync<List<Plat>>(stream,
+								new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+							return plats;
+						}
 					}
-				}
-				else
-				{
-					return null;
+					else
+					{
+						return null;
+					}
 				}
 			}
 			else
@@ -329,73 +400,120 @@ namespace BLLC.Services
 
 		public async Task<Plat> CreatePlat(Plat newPlat)
 		{
-			try
+			if (AuthentificationService.Getinstance().IsLogged)
 			{
-				var reponse = await _httpClient.PostAsJsonAsync($"plats", newPlat);
+
+				using (var _httpClient = AuthentificationService.Getinstance().HttpClient)
+				{
+
+					var reponse = await _httpClient.PostAsJsonAsync($"plats", newPlat);
+
+					if(reponse.IsSuccessStatusCode){
+
 				using (var stream = await reponse.Content.ReadAsStreamAsync())
 				{
-					return await JsonSerializer.DeserializeAsync<Plat>(stream,
-						new JsonSerializerOptions() {PropertyNameCaseInsensitive = true});
+					Plat plat=  await JsonSerializer.DeserializeAsync<Plat>(stream,
+						new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+
+							return plat;
+						}
+					}
+					else
+					{
+						return null;
+					}
 				}
 			}
-			catch (Exception)
+			else
 			{
 				return null;
 			}
+
 		}
 
 		public async Task<Service> CreateMenu(Service newService)
 		{
-			try
+			if (AuthentificationService.Getinstance().IsLogged)
 			{
-				var reponse = await _httpClient.PostAsJsonAsync($"services", newService);
-				using (var stream = await reponse.Content.ReadAsStreamAsync())
+
+				using (var _httpClient = AuthentificationService.Getinstance().HttpClient)
 				{
-					return await JsonSerializer.DeserializeAsync<Service>(stream,
-						new JsonSerializerOptions() {PropertyNameCaseInsensitive = true});
+					var reponse = await _httpClient.PostAsJsonAsync($"services", newService);
+
+
+					if (reponse.IsSuccessStatusCode)
+					{
+
+						using (var stream = await reponse.Content.ReadAsStreamAsync())
+				{
+					Service service =  await JsonSerializer.DeserializeAsync<Service>(stream,
+						new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+
+							return service;
+						}
+					}
+					else
+					{
+						return null;
+					}
 				}
 			}
-			catch (Exception)
+			else
 			{
 				return null;
 			}
+
 		}
 
 		public async Task<Service> UpdateMenu(Service menuToUpdate)
 		{
-			try
+
+			if (AuthentificationService.Getinstance().IsLogged)
 			{
-				if (menuToUpdate.IdService == null)
+
+				using (var _httpClient = AuthentificationService.Getinstance().HttpClient)
+				{
+
+					var reponse = await _httpClient.PutAsJsonAsync($"services/{menuToUpdate.IdService}", menuToUpdate);
+
+					if (reponse.IsSuccessStatusCode)
+					{
+						using (var stream = await reponse.Content.ReadAsStreamAsync())
+						{
+							Service service = await JsonSerializer.DeserializeAsync<Service>(stream,
+								new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+
+						return service;
+					}
+				}
+					else
 				{
 					return null;
 				}
-
-				var reponse = await _httpClient.PutAsJsonAsync($"services/{menuToUpdate.IdService}", menuToUpdate);
-				using (var stream = await reponse.Content.ReadAsStreamAsync())
-				{
-					return await JsonSerializer.DeserializeAsync<Service>(stream,
-						new JsonSerializerOptions() {PropertyNameCaseInsensitive = true});
-				}
 			}
-			catch (Exception)
+		}
+			else
 			{
-
 				return null;
 			}
 
 		}
 
-		public async Task<bool> RemoveMenu(Service menuToDelete)
+	public async Task<bool> RemoveMenu(Service menuToDelete)
 		{
 			if (menuToDelete.IdService != null)
 			{
-				try
+				if (AuthentificationService.Getinstance().IsLogged)
 				{
-					var response = await _httpClient.DeleteAsync($"services/{menuToDelete.IdService}");
+
+					using (var _httpClient = AuthentificationService.Getinstance().HttpClient)
+					{
+						var response = await _httpClient.DeleteAsync($"services/{menuToDelete.IdService}");
+
 					if (response.IsSuccessStatusCode)
 						return true;
-				}
-				catch (Exception)
+				} }
+				else
 				{
 					return false;
 
@@ -408,27 +526,34 @@ namespace BLLC.Services
 
 		public async Task<bool> removePlat(Plat platToRemove)
 		{
-
 			if (platToRemove.IdPlat != null)
 			{
-				try
+
+				if (AuthentificationService.Getinstance().IsLogged)
+			{
+
+				using (var _httpClient = AuthentificationService.Getinstance().HttpClient)
 				{
 					var response = await _httpClient.DeleteAsync($"plats/{platToRemove.IdPlat}");
+
 					if (response.IsSuccessStatusCode)
 						return true;
-
-				}
-				catch (Exception e)
-				{
-					return false;
 				}
 			}
+			else
+			{
+				return false;
+
+			}
+
+		}
+	
 
 			return false;
 
 		}
-	}
 
+	}
 
 
 }

@@ -17,6 +17,6 @@ namespace BLLC.Extension
 			return "?" + String.Join("&", properties.ToArray());
 		}
 
-
-    }
+		
+	}
 }
